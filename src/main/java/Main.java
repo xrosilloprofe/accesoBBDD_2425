@@ -26,6 +26,9 @@ public class Main {
         datos.addCliente(cliente1);
         System.out.println(datos.getAllClientes());
 
+        System.out.println(datos.getCliente("123X"));
+
+        datos.eliminarFactura(4);
 
 
     }
