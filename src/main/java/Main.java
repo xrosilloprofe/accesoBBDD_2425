@@ -17,5 +17,16 @@ public class Main {
         Cliente cliente =
                 new Cliente("JOAQUIN","ALONSO SAIZ","53052298S", LocalDate.now());
         datos.updateCliente(cliente);
+
+        datos.deleteCliente("123X");
+
+        Cliente cliente1 =
+                new Cliente("XAVIER","ROSILLO","123X", LocalDate.of(1993,2,14));
+
+        datos.addCliente(cliente1);
+        System.out.println(datos.getAllClientes());
+
+
+
     }
 }

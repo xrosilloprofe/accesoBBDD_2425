@@ -58,4 +58,43 @@ public class ClienteDB implements AlmacenDB{
         }
         return result;
     }
+
+    @Override
+    public int addCliente(Cliente cliente) {
+        DataSource dataSource = MyDataSource.getMySQLDataSource();
+        int result=-1;
+        try(Connection connection = dataSource.getConnection();
+            Statement st = connection.createStatement()){
+
+            String query = "insert into Cliente" +
+                    "(nombre,apellidos,dni,fecha_nacimiento)" +
+                    " values (" +
+                    " '" + cliente.getNombre() + "'," +
+                    " '" + cliente.getApellidos() + "'," +
+                    " '" + cliente.getDni() + "'," +
+                    " '" + cliente.getFecha_nacimiento() + "')";
+            result = st.executeUpdate(query);
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public int deleteCliente(String DNI) {
+        DataSource dataSource = MyDataSource.getMySQLDataSource();
+        int result=-1;
+        try(Connection connection = dataSource.getConnection();
+            Statement st = connection.createStatement()){
+
+            String query = "delete from Cliente " +
+                    " where dni = '" + DNI + "'";
+            result = st.executeUpdate(query);
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
