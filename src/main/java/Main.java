@@ -28,7 +28,9 @@ public class Main {
 
         System.out.println(datos.getCliente("123X"));
 
-        datos.eliminarFactura(4);
+        //datos.eliminarFactura(4);
+
+        System.out.println(datos.articulosPrecio(100));
 
 
     }

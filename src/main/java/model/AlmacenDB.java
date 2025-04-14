@@ -9,5 +9,5 @@ public interface AlmacenDB {
     int deleteCliente(String dni);
     Cliente getCliente(String dni);
     void eliminarFactura(int numeroFactura);
-    int articulosPrecio(double precio);
+    int articulosPrecio(int precio);
 }

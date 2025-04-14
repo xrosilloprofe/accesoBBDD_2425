@@ -218,17 +218,23 @@ public class ClienteDB implements AlmacenDB{
     @Override
     public int articulosPrecio(int precio) {
         DataSource dataSource = MyDataSource.getMySQLDataSource();
-        String query = " ? = call articulos_precio(?)";
+        String query = "{ ? = call articulos_precio(?) }";
+        int resultado=-1;
 
         try(Connection connection= dataSource.getConnection();
             CallableStatement callableStatement = connection.prepareCall(query)){
             callableStatement.setInt(2,precio);
 
-            callableStatement.executeUpdate();
+            ResultSet resultSet = callableStatement.executeQuery();
+            resultSet.next();
+            resultado = resultSet.getInt(1);
+
 
         } catch (SQLException e){
             e.printStackTrace();
         }
+
+        return resultado;
     }
 
 
