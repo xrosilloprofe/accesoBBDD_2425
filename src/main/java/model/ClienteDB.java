@@ -202,7 +202,7 @@ public class ClienteDB implements AlmacenDB{
     @Override
     public void eliminarFactura(int numeroFactura) {
         DataSource dataSource = MyDataSource.getMySQLDataSource();
-        String query = "call eliminar_factura(?)";
+        String query = "{call eliminar_factura(?)}";
 
         try(Connection connection= dataSource.getConnection();
             CallableStatement callableStatement = connection.prepareCall(query)){
@@ -235,6 +235,28 @@ public class ClienteDB implements AlmacenDB{
         }
 
         return resultado;
+    }
+
+    @Override
+    public int crearFactura(int codCliente) {
+        DataSource ds = MyDataSource.getMySQLDataSource();
+        String query = " { call crear_factura(?,?) } ";
+        int numFactura=-1;
+
+        try(Connection connection = ds.getConnection();
+            CallableStatement callableStatement = connection.prepareCall(query)){
+
+            callableStatement.setInt(2,codCliente);
+            callableStatement.registerOutParameter(1,Types.INTEGER); //preparo parámetro de salida
+            callableStatement.executeUpdate();
+            numFactura=callableStatement.getInt(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return numFactura;
     }
 
 

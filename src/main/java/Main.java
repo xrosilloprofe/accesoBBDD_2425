@@ -31,7 +31,7 @@ public class Main {
         //datos.eliminarFactura(4);
 
         System.out.println(datos.articulosPrecio(100));
-
+        System.out.println(datos.crearFactura(10));
 
     }
 }

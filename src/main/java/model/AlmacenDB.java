@@ -10,4 +10,5 @@ public interface AlmacenDB {
     Cliente getCliente(String dni);
     void eliminarFactura(int numeroFactura);
     int articulosPrecio(int precio);
+    int crearFactura(int codCliente);
 }
